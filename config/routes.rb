@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resource :dashboard, only: [:show] # specify "only" to keep rake routes clean
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    post 'follow' => 'following_relationships#create'
+  end
+
   resources :shouts, only: [:show]
   resources :text_shouts, only: [:create]
   resources :photo_shouts, only: [:create]
