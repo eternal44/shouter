@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resource :dashboard, only: [:show] # specify "only" to keep rake routes clean
-  resources :users, only: [:show] do
+  resources :users, only: [:index, :show] do
     post 'follow' => 'following_relationships#create'
+    delete 'follow' => 'following_relationships#destroy'
   end
 
   resources :shouts, only: [:show]
